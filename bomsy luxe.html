@@ -1,0 +1,266 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head link href="https://fonts.googleapis.com/css2?family=share+Tech+Mono&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boma Luxe | Streetwear Shop</title>
+<style>
+/* ===== Reset & Base ===== */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {
+    color:#fff;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371, #24c6dc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+@keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px 30px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+}
+  header h1 {
+    font-family: 'Share Tech Mono', monospace;
+    font-style: italic;
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #ff5f6d, #24c6dc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.products {
+    display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:25px; padding:40px;
+}
+.product {
+    background: rgba(255,255,255,0.1);
+    border-radius:15px; backdrop-filter:blur(8px);
+    text-align:center; padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.product:hover {transform: translateY(-8px); box-shadow:0 10px 20px rgba(0,0,0,0.5);}
+.product img {width:100%; border-radius:12px; margin-bottom:10px;}
+.product h3 {margin:10px 0; font-size:1.2rem;}
+.product p {margin-bottom:10px; font-weight:bold;}
+.btn {display:inline-block; padding:8px 12px; background:#000; color:#fff; border-radius:50px; text-decoration:none; margin-bottom:5px; transition:background 0.3s;}
+.btn:hover {background:#ff5f6d;}
+
+#cartPopup {
+    display:none; position:fixed; top:70px; right:30px;
+    background:rgba(0,0,0,0.9); padding:20px; border-radius:10px; width:300px; max-height:400px;
+    overflow-y:auto; box-shadow:0 10px 25px rgba(0,0,0,0.5); z-index:999;
+}
+#cartPopup h3 {margin-bottom:10px; text-align:center;}
+.cart-item {display:flex; justify-content:space-between; margin-bottom:10px;}
+.cart-item button {background:red; border:none; color:#fff; padding:2px 6px; border-radius:5px; cursor:pointer;}
+
+#detailsModal {
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.8); justify-content:center; align-items:center;
+    z-index:1000; padding:20px;
+}
+#detailsContent {
+    background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; max-width:500px; width:100%;
+    backdrop-filter:blur(10px); text-align:center;
+}
+#detailsContent img {width:100%; border-radius:12px; margin-bottom:15px;}
+#detailsContent h3 {margin-bottom:10px;}
+#detailsContent p {margin-bottom:10px;}
+#detailsContent .btn {margin-top:10px;}
+
+footer {text-align:center; padding:25px 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); margin-top:40px;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Boma Luxe</h1>
+<div id="cart">🛒 Cart <span id="cartCount">0</span></div>
+</header>
+
+<section class="products">
+
+<!-- Product 1 -->
+<div class="product" data-name="Black Oversized Tee" data-price="15000" data-description="Comfortable black oversized tee. Material: Cotton. Sizes: S, M, L, XL" data-image="images/black-tee.jpg">
+<img src="images/black-tee.jpg" alt="Black Oversized Tee">
+<h3>Black Oversized Tee</h3>
+<p>₦15,000</p>
+<a href="https://wa.me/2348036751459?text=I%20want%20to%20buy%20the%20Black%20Oversized%20Tee" class="btn">Buy on WhatsApp</a>
+<select class="size-select">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+<button class="btn add-to-cart">Add to Cart</button>
+<button class="btn details-btn">See Details</button>
+</div>
+
+<!-- Product 2 -->
+<div class="product" data-name="Premium Hoodie" data-price="28000" data-description="Warm and stylish hoodie. Material: Cotton blend. Sizes: S, M, L, XL" data-image="images/premium-hoodie.jpg">
+<img src="images/premium-hoodie.jpg" alt="Premium Hoodie">
+<h3>Premium Hoodie</h3>
+<p>₦28,000</p>
+<a href="https://wa.me/2348036751459?text=I%20want%20to%20buy%20the%20Premium%20Hoodie" class="btn">Buy on WhatsApp</a>
+<select class="size-select">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+<button class="btn add-to-cart">Add to Cart</button>
+<button class="btn details-btn">See Details</button>
+</div>
+
+<!-- Product 3 -->
+<div class="product" data-name="Street Pants" data-price="20000" data-description="Comfortable street pants. Material: Polyester blend. Sizes: S, M, L, XL" data-image="images/street-pants.jpg">
+<img src="images/street-pants.jpg" alt="Street Pants">
+<h3>Street Pants</h3>
+<p>₦20,000</p>
+<a href="https://wa.me/2348036751459?text=I%20want%20to%20buy%20the%20Street%20Pants" class="btn">Buy on WhatsApp</a>
+<select class="size-select">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+<button class="btn add-to-cart">Add to Cart</button>
+<button class="btn details-btn">See Details</button>
+</div>
+
+<!-- Product 4 -->
+<div class="product" data-name="Street Pants" data-price="20000" data-description="Comfortable street pants. Material: Polyester blend. Sizes: S, M, L, XL" data-image="images/nike-shoe.jpg">
+<img src="images/nike-shoe.jpg" alt="nike shoe">
+<h3>Street Pants</h3>
+<p>₦20,000</p>
+<a href="https://wa.me/2348036751459?text=I%20want%20to%20buy%20the%20Street%20Pants" class="btn">Buy on WhatsApp</a>
+<select class="size-select">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+<button class="btn add-to-cart">Add to Cart</button>
+<button class="btn details-btn">See Details</button>
+</div>
+
+<!-- Product 5 -->
+<div class="product" data-name="dior perfume" data-price="20000" data-description=  data-image="images/dior-perfume.jpg">
+<img src="images/dior-perfume.jpg" alt="dior-perfume">
+<h3>Street Pants</h3>
+<p>₦20,000</p>
+<a href="https://wa.me/2348036751459?text=I%20want%20to%20buy%20the%20Street%20Pants" class="btn">Buy on WhatsApp</a>
+<select class="size-select">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+<button class="btn add-to-cart">Add to Cart</button>
+<button class="btn details-btn">See Details</button>
+</div>
+<!-- You can copy the product div to add more items -->
+</section>
+
+<!-- Cart Popup -->
+<div id="cartPopup">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<p>Total: ₦<span id="cartTotal">0</span></p>
+<button id="checkoutBtn" class="btn">Checkout via WhatsApp</button>
+</div>
+
+<!-- Product Details Modal -->
+<div id="detailsModal">
+<div id="detailsContent">
+<button id="closeDetails" class="btn">Close</button>
+<img src="" alt="Product Image" id="detailImg">
+<h3 id="detailName"></h3>
+<p id="detailDesc"></p>
+<p id="detailPrice"></p>
+</div>
+</div>
+
+<footer>
+<p>© 2026 Boma Luxe | All Rights Reserved</p>
+</footer>
+
+<script>
+// ===== Cart Logic =====
+const cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartPopup = document.getElementById('cartPopup');
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+document.getElementById('cart').addEventListener('click', () => {
+    cartPopup.style.display = cartPopup.style.display==='block'?'none':'block';
+});
+
+document.querySelectorAll('.add-to-cart').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+        const product = e.target.closest('.product');
+        const name = product.dataset.name;
+        const price = parseInt(product.dataset.price);
+        const sizeselect = product.querySelector('.size-select');
+        const size =sizeselect ? sizeselect.value: 'N/A';
+        cart.push({name, price});
+         
+        updateCart();
+    });
+});
+
+function updateCart(){
+    cartCount.textContent = cart.length;
+    cartItems.innerHTML='';
+    let total=0;
+    cart.forEach((item,index)=>{
+        total+=item.price;
+        const div=document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML=`<span>${item.name} - ₦${item.price}</span>
+        <button onclick="removeFromCart(${index})">x</button>`;
+        cartItems.appendChild(div);
+    });
+    cartTotal.textContent = total;
+}
+
+function removeFromCart(index){cart.splice(index,1);updateCart();}
+
+// Checkout via WhatsApp
+checkoutBtn.addEventListener('click', ()=>{
+    if(cart.length===0){alert('Your cart is empty!'); return;}
+    let message='I want to buy:\n';
+    cart.forEach(item=>{message+=`- ${item.name} - ₦${item.price}\n`;});
+    message+=`Total: ₦${cart.reduce((a,b)=>a+b.price,0)}`;
+    const url='https://wa.me/2348012345678?text='+encodeURIComponent(message);
+    window.open(url,'_blank');
+});
+
+// ===== Product Details Modal =====
+const detailsModal=document.getElementById('detailsModal');
+const detailImg=document.getElementById('detailImg');
+const detailName=document.getElementById('detailName');
+const detailDesc=document.getElementById('detailDesc');
+const detailPrice=document.getElementById('detailPrice');
+
+document.querySelectorAll('.details-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+        const product = e.target.closest('.product');
+        detailImg.src=product.dataset.image;
+        detailName.textContent=product.dataset.name;
+        detailDesc.textContent=product.dataset.description;
+        detailPrice.textContent='₦'+product.dataset.price;
+        detailsModal.style.display='flex';
+    });
+});
+
+document.getElementById('closeDetails').addEventListener('click', ()=>detailsModal.style.display='none');
+</script>
+
+</body>
+</html>
